@@ -1,0 +1,11 @@
+.session-container {
+  display: grid;
+  height: 100px;
+  width: 120px;
+  grid-template-rows: 50px 50px;
+  grid-template-columns: 120px;
+}
+
+.session-controls {
+  display: flex;
+}

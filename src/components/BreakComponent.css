@@ -1,0 +1,11 @@
+.break-container {
+  display: grid;
+  height: 100px;
+  width: 100px;
+  grid-template-rows: 50px 50px;
+  grid-template-columns: 100px;
+}
+
+.break-controls {
+  display: flex;
+}
