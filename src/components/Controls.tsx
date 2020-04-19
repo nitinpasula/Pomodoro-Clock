@@ -6,9 +6,13 @@ import AutorenewIcon from "@material-ui/icons/Autorenew";
 
 const Controls: React.FC<any> = (props: any) => {
   useEffect(() => {
+    let interval: NodeJS.Timeout;
     if (props.playON) {
-      setTimeout(props.decrementTimer, 1000);
+      interval = setInterval(props.decrementTimer, 1000);
     }
+    return function cleanup() {
+      clearInterval(interval);
+    };
   }, [props.playON, props.decrementTimer, props.sessionTime]);
 
   return (
