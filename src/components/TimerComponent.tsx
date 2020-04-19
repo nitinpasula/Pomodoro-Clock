@@ -22,17 +22,21 @@ const TimerComponent: React.FC<any> = (props: any) => {
   const textStyle = {
     color: props.breakON ? "red" : "green",
   };
-  const minutes =
-    Math.floor(props.sessionTime / 60) > 0
-      ? Math.floor(props.sessionTime / 60)
-      : "00";
-  const seconds = props.sessionTime % 60 > 0 ? props.sessionTime % 60 : "00";
+  const minutes = Math.floor(props.sessionTime / 60);
+  const minutesString = minutes > 9 ? minutes : "0" + minutes;
+  const seconds = props.sessionTime % 60;
+  const secondsString = seconds > 9 ? seconds : "0" + seconds;
   return (
     <div>
       <h4 id="timer-label">{timerLabel}</h4>
-      <h4 style={textStyle} id="time-left">
-        {`${minutes}:${seconds}`}
-      </h4>
+      <time style={textStyle} id="time-left">
+        {`${minutesString}:${secondsString}`}
+      </time>
+      {props.sessionTime === 0 && !props.breakON ? (
+        <audio id="beep" src="./audio/buzzer.mp3" autoPlay></audio>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

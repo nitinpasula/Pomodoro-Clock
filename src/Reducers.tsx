@@ -57,6 +57,7 @@ export const pomodoroClock = (state = initialState, action: any) => {
     case BREAK_ON:
       return Object.assign({}, state, {
         breakON: true,
+        beepON: true,
         sessionTime: state.breakLength * 60,
       });
     case BREAK_OFF:

@@ -21,9 +21,6 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => {
       dispatch(tickAction());
     },
     startBreak: () => {
-      if (ownProps.sessionTime === 0) {
-        dispatch(beepOnAction());
-      }
       dispatch(breakOnAction());
     },
     stopBreak: () => {
