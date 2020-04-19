@@ -13,9 +13,14 @@ const TimerComponent: React.FC<any> = (props: any) => {
   return (
     <div>
       <h4 id="timer-label">{timerLabel}</h4>
-      <h4 id="time-left" style={textStyle}>
-        {minutes}:{seconds}
-      </h4>
+      <input
+        type="text"
+        readOnly
+        style={textStyle}
+        id="time-left"
+        value={`${minutes}:${seconds}`}
+        size={1}
+      />
     </div>
   );
 };
