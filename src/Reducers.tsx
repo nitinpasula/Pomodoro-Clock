@@ -5,14 +5,19 @@ import {
   SESSION_INCREMENT,
   PLAY_PAUSE,
   RESET,
-  TIMER,
+  SESSION_TICK,
+  BREAK_ON,
+  BREAK_OFF,
+  BEEP_ON,
+  BEEP_OFF,
 } from "./actions";
 const initialState = {
   breakLength: 5,
   sessionLength: 25,
   sessionTime: 1500,
   playON: false,
-  isInBreak: false,
+  breakON: false,
+  beepON: false,
 };
 
 export const pomodoroClock = (state = initialState, action: any) => {
@@ -47,22 +52,22 @@ export const pomodoroClock = (state = initialState, action: any) => {
       return Object.assign({}, state, { playON: !state.playON });
     case RESET:
       return Object.assign({}, initialState);
-    case TIMER:
-      let newSessionTime = state.sessionTime;
-      let newIsInBreak = state.isInBreak;
-      if (!state.isInBreak && state.sessionTime <= 0) {
-        newIsInBreak = true;
-        newSessionTime = state.breakLength * 60 + 1;
-      }
-      if (state.isInBreak && state.sessionTime <= 0) {
-        newIsInBreak = false;
-        newSessionTime = state.sessionLength * 60 + 1;
-      }
+    case SESSION_TICK:
+      return Object.assign({}, state, { sessionTime: state.sessionTime - 1 });
+    case BREAK_ON:
       return Object.assign({}, state, {
-        sessionTime: newSessionTime - 1,
-        isInBreak: newIsInBreak,
+        breakON: true,
+        sessionTime: state.breakLength * 60,
       });
-
+    case BREAK_OFF:
+      return Object.assign({}, state, {
+        breakON: false,
+        sessionTime: state.sessionLength * 60,
+      });
+    case BEEP_ON:
+      return Object.assign({}, state, { beepON: true });
+    case BEEP_OFF:
+      return Object.assign({}, state, { beepON: false });
     default:
       return state;
   }

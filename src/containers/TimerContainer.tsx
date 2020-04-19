@@ -1,13 +1,42 @@
 import { connect } from "react-redux";
 import TimerComponent from "../components/TimerComponent";
+import {
+  tickAction,
+  breakOnAction,
+  breakOffAction,
+  beepOnAction,
+} from "../actions";
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: any, ownProps: any) => {
   return {
     sessionTime: state.sessionTime,
-    breakTime: state.breakLength,
-    isInBreak: state.isInBreak,
+    breakON: state.breakON,
+    playON: state.playON,
   };
 };
-const TimerContainer = connect(mapStateToProps)(TimerComponent);
+
+const mapDispatchToProps = (dispatch: any, ownProps: any) => {
+  return {
+    tickSession: () => {
+      dispatch(tickAction());
+    },
+    startBreak: () => {
+      if (ownProps.sessionTime === 0) {
+        dispatch(beepOnAction());
+      }
+      dispatch(breakOnAction());
+    },
+    stopBreak: () => {
+      dispatch(breakOffAction());
+    },
+    startBeep: () => {
+      dispatch(beepOnAction());
+    },
+  };
+};
+const TimerContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TimerComponent);
 
 export default TimerContainer;

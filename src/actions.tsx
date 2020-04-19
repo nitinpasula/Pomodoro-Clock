@@ -3,8 +3,12 @@ export const BREAK_DECREMENT = "BREAK_DECREMENT";
 export const SESSION_INCREMENT = "SESSION_INCREMENT";
 export const SESSION_DECREMENT = "SESSION_DECREMENT";
 export const PLAY_PAUSE = "PLAY_PAUSE";
-export const RESET = "REST";
-export const TIMER = "TIMER";
+export const RESET = "RESET";
+export const SESSION_TICK = "SESSION_TICK";
+export const BEEP_ON = "BEEP_ON";
+export const BEEP_OFF = "BEEP_OFF";
+export const BREAK_ON = "BREAK_ON";
+export const BREAK_OFF = "BREAK_OFF";
 
 export const breakIncrement = () => {
   return {
@@ -42,8 +46,26 @@ export const reset = () => {
   };
 };
 
-export const timer = () => {
+export const tickAction = () => {
   return {
-    type: TIMER,
+    type: SESSION_TICK,
+  };
+};
+
+export const breakOnAction = () => {
+  return {
+    type: BREAK_ON,
+  };
+};
+
+export const breakOffAction = () => {
+  return {
+    type: BREAK_OFF,
+  };
+};
+
+export const beepOnAction = () => {
+  return {
+    type: BEEP_ON,
   };
 };

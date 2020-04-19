@@ -3,7 +3,7 @@ import BreakContainer from "./containers/BreakContainer";
 import SessionContainer from "./containers/SessionContainer";
 import TimerContainer from "./containers/TimerContainer";
 import ControlsContainer from "./containers/ControlsContainer";
-import Beep from "./components/Beep";
+import BeepContainer from "./containers/BeepContainer";
 
 const App: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ const App: React.FC = () => {
         <BreakContainer />
         <SessionContainer />
       </div>
-      <Beep />
+      <BeepContainer />
       <TimerContainer />
       <ControlsContainer />
     </div>

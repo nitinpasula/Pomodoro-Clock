@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const TimerComponent: React.FC<any> = (props: any) => {
-  const timerLabel = props.isInBreak ? "Break" : "Session";
+  useEffect(() => {
+    if (props.playON) {
+      if (props.sessionTime >= 0) {
+        let interval = setInterval(props.tickSession, 1000);
+        return () => {
+          clearInterval(interval);
+        };
+      } else {
+        if (props.breakON) {
+          props.stopBreak();
+        } else {
+          props.startBreak();
+        }
+      }
+    }
+  });
+
+  const timerLabel = props.breakON ? "Break" : "Session";
   const textStyle = {
-    color: props.isInBreak ? "red" : "green",
+    color: props.breakON ? "red" : "green",
   };
   const minutes =
     Math.floor(props.sessionTime / 60) > 0
@@ -13,14 +30,9 @@ const TimerComponent: React.FC<any> = (props: any) => {
   return (
     <div>
       <h4 id="timer-label">{timerLabel}</h4>
-      <input
-        type="text"
-        readOnly
-        style={textStyle}
-        id="time-left"
-        value={`${minutes}:${seconds}`}
-        size={1}
-      />
+      <h4 style={textStyle} id="time-left">
+        {`${minutes}:${seconds}`}
+      </h4>
     </div>
   );
 };

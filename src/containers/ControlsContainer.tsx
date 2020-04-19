@@ -1,4 +1,4 @@
-import { playOrPause, reset, timer } from "../actions";
+import { playOrPause, reset } from "../actions";
 import { connect } from "react-redux";
 import Controls from "../components/Controls";
 
@@ -16,9 +16,6 @@ const mapDispatchToProps = (dispatch: any) => {
     },
     handleReset: () => {
       dispatch(reset());
-    },
-    decrementTimer: () => {
-      dispatch(timer());
     },
   };
 };
